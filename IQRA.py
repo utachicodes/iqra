@@ -115,7 +115,7 @@ class Game:
                                    200, 50, "Start Game", GOLD, LIGHT_GRAY)
 
         self.logo = pygame.image.load("dmsa_logo.png") # U don't really need this it's the Daust islamic club logo , but I'll leave it here.
-        self.logo = pygame.transform.scale(self.logo, (100, 100))
+        self.logo = pygame.transform.scale(self.logo, (150, 150))
 
     def draw_wheel(self, surface):
         center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
@@ -130,7 +130,7 @@ class Game:
 
             reshaped_text = arabic_reshaper.reshape(letter)
             bidi_text = get_display(reshaped_text)
-            text = self.small_font.render(bidi_text, True, NAVY)  # Use smaller font
+            text = self.small_font.render(bidi_text, True, NAVY)  
             text_rect = text.get_rect(center=(x, y))
             surface.blit(text, text_rect)
 
@@ -167,7 +167,7 @@ class Game:
 
         for i, player in enumerate(self.players):
             box_rect = pygame.Rect(50 if i == 0 else SCREEN_WIDTH - 300, 100,
-                                  250, 150)  # Increased box size
+                                  250, 150)  
             pygame.draw.rect(surface, LIGHT_GRAY, box_rect, border_radius=10)
             pygame.draw.rect(surface, NAVY, box_rect, 2, border_radius=10)
 
