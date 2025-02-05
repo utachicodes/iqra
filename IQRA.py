@@ -22,11 +22,11 @@ GREEN = (34, 139, 34)
 ARABIC_LETTERS = [
     'ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش',
     'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن',
-    'ه', 'و', 'ي'
+    'ه', 'و', 'ي' 
 ]
 
-# Load a font that supports Arabic
-font_path = r"C:\Users\abdou\project_folder\Janna LT Bold.ttf"  # Use a raw string literal
+# Load a font that supports Arabic and the path to it now remember to and "r" in front of the path.
+font_path = r"C:\Users\abdou\project_folder\Janna LT Bold.ttf"  
 
 class TextInput:
     def __init__(self, x, y, width, height, placeholder="Enter name"):
@@ -98,7 +98,7 @@ class Game:
         self.is_spinning = False
         self.selected_letter = None
         self.font = pygame.font.Font(font_path, 48)
-        self.small_font = pygame.font.Font(font_path, 24)  # Smaller font for Arabic letters
+        self.small_font = pygame.font.Font(font_path, 24)  
 
         self.spin_button = Button(SCREEN_WIDTH//2 - 100, SCREEN_HEIGHT - 100,
                                   200, 50, "SPIN", LIGHT_GRAY, GOLD)
@@ -108,13 +108,13 @@ class Game:
                                    200, 50, "✗ Wrong", RED, LIGHT_GRAY)
 
         self.name_inputs = [
-            TextInput(SCREEN_WIDTH//2 - 150, SCREEN_HEIGHT//2 - 50, 300, 50, "Enter Player 1 Name"),
-            TextInput(SCREEN_WIDTH//2 - 150, SCREEN_HEIGHT//2 + 50, 300, 50, "Enter Player 2 Name")
+            TextInput(SCREEN_WIDTH//2 - 150, SCREEN_HEIGHT//2 - 50, 300, 50, "Player 1"),
+            TextInput(SCREEN_WIDTH//2 - 150, SCREEN_HEIGHT//2 + 50, 300, 50, "Player 2")
         ]
         self.start_button = Button(SCREEN_WIDTH//2 - 100, SCREEN_HEIGHT//2 + 150,
                                    200, 50, "Start Game", GOLD, LIGHT_GRAY)
 
-        self.logo = pygame.image.load("dmsa_logo.png")
+        self.logo = pygame.image.load("dmsa_logo.png") # U don't really need this it's the Daust islamic club logo , but I'll leave it here.
         self.logo = pygame.transform.scale(self.logo, (100, 100))
 
     def draw_wheel(self, surface):
@@ -135,10 +135,14 @@ class Game:
             surface.blit(text, text_rect)
 
         arrow_length = 30
+        arrow_angle = math.radians(self.angle)
+        arrow_end_x = center[0] + int(arrow_length * math.cos(arrow_angle))
+        arrow_end_y = center[1] - int(arrow_length * math.sin(arrow_angle))
+
         pygame.draw.polygon(surface, GOLD, [
-            (center[0], center[1] - arrow_length),
-            (center[0] - 10, center[1] + 10),
-            (center[0] + 10, center[1] + 10)
+            (center[0], center[1]),
+            (arrow_end_x - 10, arrow_end_y),
+            (arrow_end_x + 10, arrow_end_y)
         ])
 
     def draw_name_input(self, surface):
@@ -262,4 +266,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
